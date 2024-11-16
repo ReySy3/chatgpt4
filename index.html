@@ -1,333 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yukihira Your AI</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-ZtMvTm3TIHSSBzoiGoHEa+lFeoIYWi+UUJvO7Wph0NrfWhBEtd+5uyzpDmI9/yeYXrGdHX4C6h32Jx3ax2sBbw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="icon" type="image/x-icon" href="https://i.imgur.com/4d09XMO.jpeg">
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Haru Ai</title> 
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script> 
+  <link rel="stylesheet" href="style.css">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    #particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    nav {
+      background-color: transparent;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
     }
 
     body {
       font-family: Arial, sans-serif;
-      background-color: #000;/*f5f5f5*/
+      background-color: #000;
       color: #fff;
-      padding: 20px;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .container {
       max-width: 800px;
       margin: 0 auto;
-      margin-bottom: 45px;
-    }
-
-    .header {
-      background-color: #000;/*2c3e50*/
-      color: #fff;
-      text-align: center;
+      height: 60vh;
+      overflow-y: auto;
+      flex-grow: 1;
       padding: 20px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      position: relative;
-      box-shadow: 0px 0px 50px rgba(50, 50, 50, 25);
-    }
-
-    .header-links {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-
-    .header-link {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 16px;
-    }
-    
-    .header a {
-      color: #0ff;
-      text-decoration: none;
-      }
-
-    .profile-image {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin: 0 auto;
-      display: block;
-      margin-bottom: 20px;
-      opacity: 85%;
-      box-shadow: 0px 0px 10px rgba(255, 255, 255, 2.5);
-    }
-
-    .header p {
-      font-family: 'Times New Roman', Times, serif;
-    }
-
-    .copy-icon {
-      background-image: url("https://i.imgur.com/ZRHnuKN.png");
-      background-size: cover;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      border-radius: 50%;
-      padding: 5px;
-      transition: background-color 0.3s ease;
-    }
-
-    .copy-icon:hover {
-      background-color: #ddd;
+      border-radius: 15px;
+      background-color: transparent;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 
     .message {
       padding: 20px;
       margin-bottom: 20px;
-      position: relative;
       border-radius: 20px;
-      overflow: hidden;
-      position: relative;
+      word-wrap: break-word;
     }
 
-    .user-message {
-      background-color: #000;/*3498db*/
-      text-align: right;
-      color: #fff;
-      box-shadow: 0px 0px 10px rgba(255, 255, 255, 2.5);
+    .user-message, .bot-message {
+      background-color: transparent;
+      box-shadow: none;
     }
 
-    .bot-message {
-      background-color: #000;/*c9f0f1*/
-      text-align: left;
-      position: relative;
-      box-shadow: 0px 0px 10px rgba(90, 90, 90, 2.5);
-    }
-    
     .user-input {
-      flex: 1;
       padding: 15px;
       border: none;
       border-radius: 13px;
       background-color: transparent;
       font-size: 16px;
-      box-shadow: 0px 0px 6px rgba(255, 255, 255, 2.5);
-      transition: border-color 0.3s ease;
-      outline: none;
+      color: #fff;
+      border: 1px solid #fff;
       margin-right: 10px;
+    }
+
+    .user-input:focus {
+      outline: none;
+      border-color: #00f;
     }
 
     .send-button {
       padding: 15px;
       border: none;
-      background-color: #333;
+      background-color: transparent;
       color: #fff;
       border-radius: 10px;
       cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-      box-shadow: 0px 0px 5px rgba(90, 90, 90, 2.5);
     }
 
-    .send-button i {
-      color: #000;
+    .input-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: transparent;
+      border-radius: 15px;
     }
 
-    .send-button:hover {
-      background-color: #333;
+    .navbar-container {
+      margin-bottom: 20px;
     }
-    
-      .container-e {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #000;/*f1f1f1*/
-    padding: 10px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 2.5);
-  }
-
-  .input-container {
-    display: flex;
-    align-items: center;
-  }
-    .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-
-    .user-message .avatar {
-      float: left;
-    }
-
-    .bot-message .avatar {
-      float: right;
-      box-shadow: 0px 0px 5px rgba(255, 255, 255, 2.5);
-    }
-
-    @media screen and (max-width: 600px) {
-      .message {
-        padding: 15px;
-      }
-
-      .user-input {
-        padding: 10px;
-        font-size: 14px;
-        color: #fff;
-      }
-
-      .send-button {
-        padding: 10px;
-      }
-
-      .header-links {
-        top: 10px;
-        right: 10px;
-      }
-      
-      .header-link {
-        margin-left: 10px;
-        font-size: 14px;
-      }
-
-      .avatar {
-        width: 30px;
-        height: 30px;
-      }
-    }
- </style>
-</head>
-<body>
-  <div class="header">
-    <img src="https://i.imgur.com/4d09XMO.jpeg" alt="Profile Image" class="profile-image">
-    <h1>Yukihira <br> AI Assistant</h1>
-    <p>Made by: Haru Lynx
-
-  <div class="container" id="container">
-  </div>
-
-  <div class="container-e">
-    <div class="input-container">
-      <input type="text" id="user-input" class="user-input" placeholder="Type a message...">
-      <button id="send-button" class="send-button">Send</button>
-    </div>
-  </div>
-</body>
+  </style> 
+</head> 
+<body> 
+  <nav> 
+    <a href="#">LLAMA 3.1-TURBO</a>
+    <pre>made by: Haru</pre>
+  </nav> 
+  <div id="particles-js"></div> 
+  <div class="navbar-container"></div> 
+  <div class="container" id="container"> 
+    <div class="message bot-message">
+      Haru Lynx Ai, How can I help you today?
+    </div> 
+  </div> 
+  <div class="input-container"> 
+    <input type="text" id="user-input" class="user-input" placeholder="Type a message..."> 
+    <button id="send-button" class="send-button">Send</button> 
+  </div> 
   <script>
-  let c = document.getElementById('container');
-  let button = document.getElementById('send-button');
-  let input = document.getElementById('user-input');
-  let randomNumber = Math.floor(Math.random() * 1000) + 50;
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#1DB954" },
+        shape: {
+          type: "circle",
+          stroke: { width: 0, color: "#000000" },
+          polygon: { nb_sides: 5 }
+        },
+        opacity: {
+          value: 0.5,
+          anim: { enable: false }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: { enable: false }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#1DB954",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 6,
+          direction: "none",
+          out_mode: "out"
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 400 },
+          bubble: { distance: 400, size: 40 },
+          repulse: { distance: 200 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
 
-  let aiAvatarURL = "https://i.imgur.com/4d09XMO.jpeg";
-  let userAvatarURL = "https://i.imgur.com/cw48iRS.png";
+    async function fetchBotResponse(userInput) {
+      const apiUrl = `https://hazeyy-ai-models.onrender.com/llama32?content=${encodeURIComponent(userInput)}`;
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error("API Error: " + response.status);
 
-  let initialMessage = document.createElement('div');
-  initialMessage.classList.add('message', 'bot-message');
-  initialMessage.style.textAlign = "center";
-  initialMessage.innerHTML = "How can I help you today?";
-  c.appendChild(initialMessage);
-
-  async function sendMessage() {
-    let userInput = input.value;
-    if (!userInput.trim()) return; 
-    input.value = '';
-
-    let userMessage = document.createElement('div');
-    userMessage.classList.add('message', 'user-message');
-    userMessage.innerHTML = `
-      <img src="${userAvatarURL}" alt="User Avatar" class="avatar user-avatar">
-      <div>${userInput}</div>
-    `;
-    c.appendChild(userMessage);
-    c.scrollTop = c.scrollHeight;
-
-    let processingMessage = document.createElement('div');
-    processingMessage.classList.add('message', 'bot-message');
-    processingMessage.innerText = "Typing...";
-    c.appendChild(processingMessage);
-
-    try {
-      let response = await getBotResponse(userInput);
-      c.removeChild(processingMessage);
-
-      let botMessage = document.createElement('div');
-      botMessage.classList.add('message', 'bot-message');
-      botMessage.innerHTML = `
-        <img src="${aiAvatarURL}" alt="AI Avatar" class="avatar ai-avatar">
-        <div>${response}</div>
-      `;
-      c.appendChild(botMessage);
-
-      let copyIcon = document.createElement('div');
-      copyIcon.classList.add('copy-icon');
-      copyIcon.addEventListener('click', () => {
-        let responseWithoutBr = response.replace(/<br>/g, '\n'); 
-        navigator.clipboard.writeText(responseWithoutBr).then(() => {
-            alert("Copied to clipboard");
-        }).catch(err => {
-            console.error('Could not copy text: ', err);
-        });
-      });
-      botMessage.appendChild(copyIcon);
-    } catch (error) {
-      console.error('Error:', error.message);
-      processingMessage.innerText = 'Error: ' + error.message;
+      const data = await response.json();
+      return data.choices?.[0]?.message?.content || "Sorry, I couldn't process that.";
     }
-    c.scrollTop = c.scrollHeight;
-  }
 
-  button.addEventListener('click', sendMessage);
-  input.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-      sendMessage();
-    }
-  });
+    async function handleSendMessage() {
+      const userInput = document.getElementById("user-input").value.trim();
+      if (!userInput) return;
 
-  async function getBotResponse(userInput) {
-    let url = `https://deku-rest-apis.ooguy.com/new/gpt-3_5-turbo?prompt=${userInput}&uid=${randomNumber}`;
-    let response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    let data = await response.json();
-    let botResponse = data.gpt4;
-    
-    if (userInput.toLowerCase().includes('who made you') || userInput.toLowerCase().includes('who created you')) {
+      const userMessage = document.createElement("div");
+      userMessage.className = "message user-message";
+      userMessage.textContent = userInput;
+      document.getElementById("container").appendChild(userMessage);
+      document.getElementById("user-input").value = "";
 
-        botResponse = "I was created by Haru Lynx. If you encounter any bugs or issues, please feel free to chat with me on my Facebook account: <a href='https://www.facebook.com/profile.php?id=yuii022605'  target='_blank'><span style='color: green;'>Haru Lynx</span></a>";
+      const loadingMessage = document.createElement("div");
+      loadingMessage.className = "message bot-message";
+      loadingMessage.textContent = "Typing...";
+      document.getElementById("container").appendChild(loadingMessage);
 
-      }
-      
-    if (userInput.toLowerCase().includes('who are you') || userInput.toLowerCase().includes('sino ka')) {
+      try {
+        const botResponse = await fetchBotResponse(userInput);
+        document.getElementById("container").removeChild(loadingMessage);
 
-        botResponse = "Such a nice question you have! My name is Yukihira your personal AI assistant created by <a href='https://www.facebook.com/yuii022605' target='_blank'><span style='color: green;'>Haru Lynx</span></a> and here to help answer your questions and provide information on a variety of topics.";
+        const botMessage = document.createElement("div");
+        botMessage.className = "message bot-message";
+        botMessage.textContent = botResponse;
+        document.getElementById("container").appendChild(botMessage);
+      } catch (error) {
+        document.getElementById("container").removeChild(loadingMessage);
 
-      }
-      
-    if (userInput.toLowerCase().includes('what is your name') || userInput.toLowerCase().includes('whats your name')) {
-
-        botResponse = "I am a language model AI assistant powered by OpenAI. You can call me rainken. How may I assist you today?";
-
+        const errorMessage = document.createElement("div");
+        errorMessage.className = "message bot-message";
+        errorMessage.textContent = `Error: ${error.message}`;
+        document.getElementById("container").appendChild(errorMessage);
       }
 
-    if (userInput.toLowerCase().includes('who is ken?') || userInput.toLowerCase().includes('who is ken')) {
-
-        botResponse = "Oh!, Haru is my Developer, for more information about my creator check his <a href='https://profile-portfolio-haru.vercel.app/'target='_blank'><span style='color: green';>Simple portfolio</span></a> or his Facebook account: <a href='https://www.facebook.com/61562173151589/posts/122111359754405771/?substory_index=363229233512289&app=fbl' target='_blank'><span style='color: green;'>Ken ken</span></a>";
-
+      document.getElementById("container").scrollTop = document.getElementById("container").scrollHeight;
     }
-      
-    botResponse = botResponse.replace(/\n/g, '<br>'); 
-    return botResponse;
-  }
-  </script>
-  </html>
+
+    document.getElementById("send-button").addEventListener("click", handleSendMessage);
+    document.getElementById("user-input").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") handleSendMessage();
+    });
+  </script> 
+</body>
+</html>
